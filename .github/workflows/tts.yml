@@ -18,7 +18,7 @@ jobs:
         with:
           text: ${{ github.event.issue.body }}
           format: 'mp3'
-          content: ${{ github.event.issue.number }}.mp3
+          content: ${{ github.event.issue.body }}.mp3
       # check out branch mp3
       - uses: actions/checkout@v2
         with:
@@ -26,12 +26,12 @@ jobs:
           path: mp3
       - name: Commit files
         run: |
-          cp ${{ github.event.issue.number }}.mp3 mp3/
+          cp ${{ github.event.issue.body }}.mp3 mp3/
           cd mp3
-          git add ${{ github.event.issue.number }}.mp3
+          git add ${{ github.event.issue.body }}.mp3
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m 'issue: ${{ github.event.issue.number }}'
+          git commit -m 'issue: ${{ github.event.issue.body }}'
       - name: push
         uses: ad-m/github-push-action@master
         with:
@@ -43,7 +43,7 @@ jobs:
         with:
           comment: |
             Your audio is ready at 
-            https://github.com/l-O-O-l/TTS-action/raw/mp3/${{ github.event.issue.number }}.mp3
+            https://github.com/LiWenHui96/TTS-action/raw/mp3/${{ github.event.issue.body }}.mp3
   tts-f:
     # TTS English fast response
     runs-on: ubuntu-latest
@@ -61,12 +61,12 @@ jobs:
           mv /tmp/__input__.txt .
           sudo apt-get update -y
           sudo apt-get install wget lame libpcre2-dev libasound2-dev &
-          wget -q https://github.com/l-O-O-l/TTS-action/releases/download/0/mimic >/dev/null
+          wget -q https://github.com/LiWenHui96/TTS-action/releases/download/0/mimic >/dev/null
           chmod +x mimic
           wait
           ./mimic -voice ap -f __input__.txt -o __out__.wav
           lame __out__.wav 
-          mv __out__.mp3 ${{ github.event.issue.number }}.mp3
+          mv __out__.mp3 ${{ github.event.issue.body }}.mp3
       # check out branch mp3
       - uses: actions/checkout@v2
         with:
@@ -74,12 +74,12 @@ jobs:
           path: mp3
       - name: Commit files
         run: |
-          cp ${{ github.event.issue.number }}.mp3 mp3/
+          cp ${{ github.event.issue.body }}.mp3 mp3/
           cd mp3
-          git add ${{ github.event.issue.number }}.mp3
+          git add ${{ github.event.issue.body }}.mp3
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m 'issue: ${{ github.event.issue.number }}'
+          git commit -m 'issue: ${{ github.event.issue.body }}'
       - name: push
         uses: ad-m/github-push-action@master
         with:
@@ -91,7 +91,7 @@ jobs:
         with:
           comment: |
             Your audio is ready at 
-            https://github.com/l-O-O-l/TTS-action/raw/mp3/${{ github.event.issue.number }}.mp3
+            https://github.com/LiWenHui96/TTS-action/raw/mp3/${{ github.event.issue.body }}.mp3
   tts-cn:
     # TTS CN
     runs-on: ubuntu-latest
@@ -123,12 +123,12 @@ jobs:
           path: mp3
       - name: Commit files
         run: |
-          mv __out__.mp3 mp3/${{ github.event.issue.number }}.mp3
+          mv __out__.mp3 mp3/${{ github.event.issue.body }}.mp3
           cd mp3
-          git add ${{ github.event.issue.number }}.mp3
+          git add ${{ github.event.issue.body }}.mp3
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m 'issue: ${{ github.event.issue.number }}'
+          git commit -m 'issue: ${{ github.event.issue.body }}'
       - name: push
         uses: ad-m/github-push-action@master
         with:
@@ -140,4 +140,4 @@ jobs:
         with:
           comment: |
             Your audio is ready at 
-            https://github.com/l-O-O-l/TTS-action/raw/mp3/${{ github.event.issue.number }}.mp3
+            https://github.com/LiWenHui96/TTS-action/raw/mp3/${{ github.event.issue.body }}.mp3
